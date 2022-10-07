@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active:
+    - dev
+
+---
+server:
+  port: 10020
+
+spring:
+  application:
+    name: newsong-service
+    
+security:
+  oauth2:
+    client:
+      id: auth_id
+      client-secret: auth_secret
+    resource:
+      jwt:
+        key-value: jwt_secret_key # authorization server와 동일하게 셋팅해야 함
+    

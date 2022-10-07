@@ -1,0 +1,17 @@
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false # lazy loading으로 인해 json serialize 오류 방지
+
+elasticsearch:
+  host: cdssw.duckdns.org
+  port: 9400
+  index: newsong
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ # eureka server 주소
+
+swagger:
+  host: localhost:9000
