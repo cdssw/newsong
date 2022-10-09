@@ -4,8 +4,8 @@ spring:
       fail-on-empty-beans: false # lazy loading으로 인해 json serialize 오류 방지
 
 elasticsearch:
-  host: newsong-es
-  port: 9200
+  host: cdssw.duckdns.org
+  port: 9400
   index: newsong
       
 eureka:
