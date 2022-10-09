@@ -41,7 +41,7 @@ public class ElasticsearchConfig {
 	
 	@Bean
 	public RestHighLevelClient restHighLevelClient() {
-		return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, tls)));
+		return new RestHighLevelClient(RestClient.builder("https".equals(tls) ? new HttpHost(host, port, tls) : new HttpHost(host, port)));
 	}
 	
 	@Bean
