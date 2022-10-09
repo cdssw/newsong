@@ -6,7 +6,7 @@ spring:
 elasticsearch:
   host: localhost
   port: 9200
-  tls: http  
+  tls: http
   index: newsong
       
 eureka:
