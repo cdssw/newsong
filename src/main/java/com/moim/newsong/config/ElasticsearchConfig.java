@@ -36,9 +36,12 @@ public class ElasticsearchConfig {
 	@Value("${elasticsearch.port}")
 	private int port;
 	
+	@Value("${elasticsearch.tls}")
+	private String tls;
+	
 	@Bean
 	public RestHighLevelClient restHighLevelClient() {
-		return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, "https")));
+		return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, tls)));
 	}
 	
 	@Bean
