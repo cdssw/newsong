@@ -32,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 */
 @EnableElasticsearchRepositories
 @Configuration
-@Slf4j
 public class ElasticsearchConfig {
 
 	@Value("${elasticsearch.host}")
@@ -46,7 +45,6 @@ public class ElasticsearchConfig {
 	
 	@Bean
 	public RestHighLevelClient restHighLevelClient() {
-		log.info("host [{}], port [{}], tls [{}]", host, port, tls);
 		return new RestHighLevelClient(RestClient.builder("https".equals(tls) ? new HttpHost(host, port, tls) : new HttpHost(host, port)));
 	}
 	
