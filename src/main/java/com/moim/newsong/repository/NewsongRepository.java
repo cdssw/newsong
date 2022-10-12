@@ -12,6 +12,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder.Type;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -111,14 +112,18 @@ public class NewsongRepository {
 		highlightBuilder.preTags(dto.getPreTags());
 		highlightBuilder.postTags(dto.getPostTags());
 		searchSourceBuilder
-			.sort(SortBuilders.fieldSort(dto.getSort()).order(SortOrder.ASC))
 			.from(pageable.getPageNumber() * pageable.getPageSize())
 			.size(pageable.getPageSize())
 			.highlighter(highlightBuilder)
 			;
+
+		// sort는 optional
+		if(dto.getSort() != null) {
+			searchSourceBuilder.sort(SortBuilders.fieldSort(dto.getSort()).order(SortOrder.ASC));
+		}
 		
 		// 수신받은 검색필드를 array로 설정하여 querybuilder 생성
-		MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(dto.getQuery(), dto.getSearchField().toArray(new String[dto.getSearchField().size()]));
+		MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(dto.getQuery(), dto.getSearchField().toArray(new String[dto.getSearchField().size()])).type(Type.PHRASE);
 		
 		// builder에 query 설정
 		searchSourceBuilder.query(multiMatchQueryBuilder);

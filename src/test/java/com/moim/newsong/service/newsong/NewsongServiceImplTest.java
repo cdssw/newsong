@@ -53,7 +53,6 @@ public class NewsongServiceImplTest {
 				.searchField(Arrays.asList("songTitle", "songContent"))
 				.preTags("<b>")
 				.postTags("</b>")
-				.sort("songNo")
 				.build();
 	}
 	

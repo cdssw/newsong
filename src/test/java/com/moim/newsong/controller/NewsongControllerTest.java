@@ -73,7 +73,6 @@ public class NewsongControllerTest extends BaseControllerTest {
 				.searchField(Arrays.asList("songTitle", "songContent"))
 				.preTags("<b>")
 				.postTags("</b>")
-				.sort("songNo")
 				.build();
 		
 		res1 = SongDto.SearchRes.builder()

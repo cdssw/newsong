@@ -43,7 +43,7 @@ public class SongDto {
 		private String preTags;
 		@NotBlank
 		private String postTags;
-		@NotBlank
+		
 		private String sort;
 	}
 

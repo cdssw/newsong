@@ -68,7 +68,6 @@ public class NewsongIntegrationMockTest {
 				.searchField(Arrays.asList("songTitle", "songContent"))
 				.preTags("<b>")
 				.postTags("</b>")
-				.sort("songNo")
 				.build();
 		
 		// when
