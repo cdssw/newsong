@@ -72,6 +72,7 @@ public class NewsongRepository {
 		try {
 			res = client.search(req, RequestOptions.DEFAULT);
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new NewsongBusinessException(ErrorCode.SEARCH_FILED_INVALID);
 		}
 		

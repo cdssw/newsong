@@ -14,4 +14,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka/ # eureka server 주소
 
 swagger:
-  host: localhost:9000
+  host: localhost:8090

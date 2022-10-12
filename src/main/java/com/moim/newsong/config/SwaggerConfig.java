@@ -59,7 +59,7 @@ public class SwaggerConfig {
 				.apiInfo(swaggerInfo())
 				.host(host)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.moim.meet.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.moim.newsong.controller"))
 				.paths(PathSelectors.any()).build()
 				.securityContexts(Lists.newArrayList(securityContext()))
 				.securitySchemes(Lists.newArrayList(apiKey())) // authorization header 추가

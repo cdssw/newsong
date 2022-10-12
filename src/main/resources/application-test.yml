@@ -5,7 +5,8 @@ spring:
 
 elasticsearch:
   host: cdssw.duckdns.org
-  port: 9400
+  port: 9200
+  tls: http
   index: newsong
       
 eureka:

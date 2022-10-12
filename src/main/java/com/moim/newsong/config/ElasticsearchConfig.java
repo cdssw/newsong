@@ -10,6 +10,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
+import com.moim.newsong.repository.NewsongRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * ElasticsearchConfig.java
  * 
@@ -36,9 +40,12 @@ public class ElasticsearchConfig {
 	@Value("${elasticsearch.port}")
 	private int port;
 	
+	@Value("${elasticsearch.tls}")
+	private String tls;
+	
 	@Bean
 	public RestHighLevelClient restHighLevelClient() {
-		return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, "https")));
+		return new RestHighLevelClient(RestClient.builder("https".equals(tls) ? new HttpHost(host, port, tls) : new HttpHost(host, port)));
 	}
 	
 	@Bean
