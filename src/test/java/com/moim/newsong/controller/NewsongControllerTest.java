@@ -88,15 +88,34 @@ public class NewsongControllerTest extends BaseControllerTest {
 	
 	// 테스트 하는것은 dto를 가지고 controller 호출이 잘 되는지 확인
 	@Test
-	public void testPostMultiMatchQuery() throws Exception {
+	public void testPostSearch() throws Exception {
 		// given
 		List<SongDto.SearchRes> list = Arrays.asList(res1, res2);
 		Pageable pageable = PageRequest.of(0, 10);
 		Page<SongDto.SearchRes> pageList = new PageImpl<>(list, pageable, list.size());
-		given(newsongService.postMultiMatchQuery(any(), any())).willReturn(pageList);
+		given(newsongService.postSearch(any(), any())).willReturn(pageList);
 		
 		// when
 		final MvcResult result = mvc.perform(post("/search")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isOk())
+				.andReturn();
+		
+		// assert
+		log.info(result.getRequest().getContentAsString());		
+	}
+	
+	@Test
+	public void testPostSearchOne() throws Exception {
+		// given
+		List<SongDto.SearchRes> list = Arrays.asList(res1, res2);
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<SongDto.SearchRes> pageList = new PageImpl<>(list, pageable, list.size());
+		given(newsongService.postSearchOne(any(), any(), any())).willReturn(pageList);
+		
+		// when
+		final MvcResult result = mvc.perform(post("/search/001")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(dto)))
 				.andExpect(status().isOk())

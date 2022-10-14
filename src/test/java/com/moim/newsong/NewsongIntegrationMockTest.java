@@ -61,7 +61,7 @@ public class NewsongIntegrationMockTest {
 	}
 	
 	@Test
-	public void testPostMultiMatchQuery() throws Exception {
+	public void testPostSearch() throws Exception {
 		// given
 		SongDto.SearchReq dto = SongDto.SearchReq.builder()
 				.query("우리")
@@ -72,6 +72,27 @@ public class NewsongIntegrationMockTest {
 		
 		// when
 		final MvcResult result = mvc.perform(post("/search?page=5&size=10")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(dto)))
+				.andExpect(status().isOk())
+				.andReturn();
+		
+		// then
+		assertEquals(result.getResponse().getStatus(), HttpStatus.OK.value());
+	}
+	
+	@Test
+	public void testPostSearchOne() throws Exception {
+		// given
+		SongDto.SearchReq dto = SongDto.SearchReq.builder()
+				.query("우리")
+				.searchField(Arrays.asList("songTitle", "songContent"))
+				.preTags("<b>")
+				.postTags("</b>")
+				.build();
+		
+		// when
+		final MvcResult result = mvc.perform(post("/search/001?page=0&size=10")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(dto)))
 				.andExpect(status().isOk())

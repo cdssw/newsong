@@ -30,8 +30,13 @@ public class NewsongServiceImpl implements NewsongService {
 	private NewsongRepository newsongRepository;
 	
 	@Override
-	public Page<SearchRes> postMultiMatchQuery(SearchReq req, Pageable pageable) {
-		return newsongRepository.multiMatchQuery(req, pageable);
+	public Page<SearchRes> postSearch(SearchReq req, Pageable pageable) {
+		return newsongRepository.search(req, pageable);
+	}
+
+	@Override
+	public Page<SearchRes> postSearchOne(String songNo, SearchReq req, Pageable pageable) {
+		return newsongRepository.searchOne(songNo, req, pageable);
 	}
 
 }

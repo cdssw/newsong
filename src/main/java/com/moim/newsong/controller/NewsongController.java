@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,12 @@ public class NewsongController {
 	private NewsongService newsongService;
 	
 	@PostMapping("/search")
-	public Page<SongDto.SearchRes> postMultiMatchQuery(@RequestBody @Valid SongDto.SearchReq dto, Pageable pageable) {
-		return newsongService.postMultiMatchQuery(dto, pageable);
+	public Page<SongDto.SearchRes> postSearch(@RequestBody @Valid SongDto.SearchReq dto, Pageable pageable) {
+		return newsongService.postSearch(dto, pageable);
+	}
+	
+	@PostMapping("/search/{songNo}")
+	public Page<SongDto.SearchRes> postSearchOne(@PathVariable final String songNo, @RequestBody @Valid SongDto.SearchReq dto, Pageable pageable) {
+		return newsongService.postSearchOne(songNo, dto, pageable);
 	}
 }

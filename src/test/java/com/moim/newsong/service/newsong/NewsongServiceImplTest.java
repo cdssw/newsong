@@ -57,7 +57,7 @@ public class NewsongServiceImplTest {
 	}
 	
 	@Test
-	public void testPostMultiMatchQuery() {
+	public void testPostSearch() {
 		// given
 		SongDto.SearchRes m1 = mock(SongDto.SearchRes.class);
 		SongDto.SearchRes m2 = mock(SongDto.SearchRes.class);
@@ -66,10 +66,31 @@ public class NewsongServiceImplTest {
 		
 		Pageable pageable = PageRequest.of(0, 10);
 		Page<SearchRes> pageList = new PageImpl<>(list, pageable, list.size());
-		given(newsongRepository.multiMatchQuery(any(), any())).willReturn(pageList);
+		given(newsongRepository.search(any(), any())).willReturn(pageList);
 		
 		// when
-		Page<SongDto.SearchRes> res = newsongServiceImpl.postMultiMatchQuery(dto, pageable);
+		Page<SongDto.SearchRes> res = newsongServiceImpl.postSearch(dto, pageable);
+		
+		// then
+		assertEquals(res.getTotalElements(), 2L);
+	}
+	
+	@Test
+	public void testPostSearchOne() {
+		// given
+		SongDto.SearchRes m1 = mock(SongDto.SearchRes.class);
+		SongDto.SearchRes m2 = mock(SongDto.SearchRes.class);
+		
+		List<SearchRes> list = Arrays.asList(m1, m2);
+		
+		String songNo = "001";
+		
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<SearchRes> pageList = new PageImpl<>(list, pageable, list.size());
+		given(newsongRepository.searchOne(any(), any(), any())).willReturn(pageList);
+		
+		// when
+		Page<SongDto.SearchRes> res = newsongServiceImpl.postSearchOne(songNo, dto, pageable);
 		
 		// then
 		assertEquals(res.getTotalElements(), 2L);

@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface NewsongService {
 	
-	public Page<SongDto.SearchRes> postMultiMatchQuery(SongDto.SearchReq req, Pageable pageable);
+	public Page<SongDto.SearchRes> postSearch(SongDto.SearchReq req, Pageable pageable);
+	public Page<SongDto.SearchRes> postSearchOne(String songNo, SongDto.SearchReq req, Pageable pageable);
 
 }

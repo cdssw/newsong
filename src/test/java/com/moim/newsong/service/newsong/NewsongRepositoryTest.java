@@ -57,12 +57,27 @@ public class NewsongRepositoryTest {
 	}
 	
 	@Test
-	public void testMultiMatchQuery() {
-		// when
+	public void testSearch() {
+		// given
 		Pageable pageable = PageRequest.of(0, 10);
-		Page<SongDto.SearchRes> res = newsongRepository.multiMatchQuery(dto, pageable);
+		
+		// when
+		Page<SongDto.SearchRes> res = newsongRepository.search(dto, pageable);
 		
 		// then
 		assertEquals(res.getTotalElements(), 991L);
+	}
+	
+	@Test
+	public void testSearchOne() {
+		// given
+		Pageable pageable = PageRequest.of(0, 10);
+		String songNo = "001";
+		
+		// when
+		Page<SongDto.SearchRes> res = newsongRepository.searchOne(songNo, dto, pageable);
+		
+		// then
+		assertEquals(res.getTotalElements(), 12L);
 	}
 }
