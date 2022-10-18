@@ -65,6 +65,8 @@ public class SongDto {
 			private String songNo;
 			private String songTitle;
 			private String songContent;
+			private String duration;
+			private String category;
 		}
 		
 		@Getter
