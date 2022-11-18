@@ -7,6 +7,7 @@ elasticsearch:
   host: cdssw.duckdns.org
   port: 9400
   index: newsong
+  tls: https
       
 eureka:
   client:
